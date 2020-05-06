@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimary">#6200EE</color>      //Navigation Bar
+    <color name="colorPrimaryDark">#3700B3</color>  //Status Bars
     <color name="colorAccent">#03DAC5</color>
+
+    <!-- Light custom colors -->
+    <color name="lightNav">#01579B</color>
+    <color name="lightStatus">#01579B</color>
+    <color name="lightAccent">#7C4DFF</color>
+    <color name="lightBackground">#fefefe</color>
+
+    <!-- Dark custom colors -->
+    <color name="darkNav">#1A237E</color>
+    <color name="darkStatus">#1A237E</color>
+    <color name="darkAccent">#fefefe</color>
+    <color name="darkBackground">#222222</color>
+
 </resources>
