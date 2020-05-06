@@ -1,7 +1,8 @@
-package net.cloudfields.nimbus
+package net.cloudfields.nimbus.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import net.cloudfields.nimbus.R
 
 class MainActivity : AppCompatActivity() {
 
