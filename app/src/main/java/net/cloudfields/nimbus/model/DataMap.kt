@@ -13,7 +13,7 @@ class DataMap {
             val dataMap: ArrayList<Any> = arrayListOf()
 
             when (className) {
-                ClassName.List -> {
+                ClassName.cloudList -> {
                     for (dataObject: ParseObject in data) {
                         val listObject = CloudListEntity()
 
@@ -21,20 +21,20 @@ class DataMap {
                         listObject.order = dataObject["order"] as? Int
                         listObject.name = dataObject["name"] as? String
                         listObject.initials = dataObject["initials"] as? String
-                        listObject.detail = (dataObject["detail"] as Map<String, String>)["objectId"]
-                        listObject.type = (dataObject["type"] as Map<String, String>) ["objectId"]
+                        listObject.detail = dataObject["detail"] as? ParseObject
+                        listObject.type = dataObject["type"]  as? ParseObject
 
                         dataMap.add(listObject)
                     }
                 }
 
-                ClassName.Type -> {
+                ClassName.cloudType -> {
                     val typeObject = CloudTypeEntity()
 
                     dataMap.add(typeObject)
                 }
 
-                ClassName.Detail -> {
+                ClassName.cloudDetail -> {
                     val detailObject = CloudDetailEntity()
 
                     dataMap.add(detailObject)

@@ -16,9 +16,9 @@ class DataFetch {
     companion object {
 
         fun getData() {
-            this.getDataForClass(ClassName.List)
-            this.getDataForClass(ClassName.Type)
-            this.getDataForClass(ClassName.Detail)
+            this.getDataForClass(ClassName.cloudList)
+            //this.getDataForClass(ClassName.Type)
+            //this.getDataForClass(ClassName.Detail)
         }
 
         private fun getDataForClass(className: ClassName) {
@@ -35,15 +35,15 @@ class DataFetch {
                     // do any process here
 
                     when (className) {
-                        ClassName.List -> {
+                        ClassName.cloudList -> {
                             CloudListDAO.listData = mappedData as List<CloudListEntity>
                         }
 
-                        ClassName.Type -> {
+                        ClassName.cloudType -> {
                             CloudTypeDAO.typeData = mappedData as List<CloudTypeEntity>
                         }
 
-                        ClassName.Detail -> {
+                        ClassName.cloudDetail -> {
                             CloudDetailDAO.detailData = mappedData as List<CloudDetailEntity>
                         }
                     }
