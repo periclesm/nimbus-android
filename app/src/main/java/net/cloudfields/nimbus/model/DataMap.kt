@@ -55,7 +55,7 @@ class DataMap {
                     }
                 }
             }
-            
+
             return dataMap
         }
 
