@@ -16,9 +16,9 @@ class DataFetch {
     companion object {
 
         fun getData() {
+            this.getDataForClass(ClassName.cloudType)
+            this.getDataForClass(ClassName.cloudDetail)
             this.getDataForClass(ClassName.cloudList)
-            //this.getDataForClass(ClassName.Type)
-            //this.getDataForClass(ClassName.Detail)
         }
 
         private fun getDataForClass(className: ClassName) {
@@ -31,8 +31,6 @@ class DataFetch {
                     }
                 } else {
                     val mappedData = DataMap.dataMappingForClass(className, data)
-
-                    // do any process here
 
                     when (className) {
                         ClassName.cloudList -> {

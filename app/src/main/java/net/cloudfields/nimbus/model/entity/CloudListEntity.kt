@@ -7,6 +7,6 @@ class CloudListEntity {
     var order: Int? = 9999
     var name: String? = ""
     var initials: String? = ""
-    var detail: ParseObject? = null
-    var type: ParseObject? = null
+    var detail: CloudDetailEntity? = CloudDetailEntity()
+    var type: CloudTypeEntity? = CloudTypeEntity()
 }
