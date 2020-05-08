@@ -10,31 +10,26 @@ class NimbusApplication : Application() {
         private var application: Application? = null
 
         fun getApplication(): Application? {
-            return application
+            return this.application
         }
 
         fun getContext(): Context? {
-            return getApplication()?.applicationContext
+            return this.application?.applicationContext
         }
 
-        fun appResources(): Resources {
-            return this.getContext()!!.resources
+        fun appResources(): Resources? {
+            return this.application?.applicationContext?.resources
         }
     }
 
     override fun onCreate() {
         super.onCreate()
         application = this
-        this.appPreferences()
 
         ParseController.sharedInstance.initParse()
     }
 
     override fun onTerminate() {
         super.onTerminate()
-    }
-
-    fun appPreferences() {
-        //just add any preference here when needed
     }
 }
