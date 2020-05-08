@@ -1,20 +1,19 @@
 package net.cloudfields.nimbus.view
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_list.*
+import kotlinx.android.synthetic.main.listitem_cloudlist.view.*
 import net.cloudfields.nimbus.R
 import net.cloudfields.nimbus.model.dao.CloudListDAO
+import net.cloudfields.nimbus.model.entity.CloudDetailEntity
 import net.cloudfields.nimbus.model.entity.CloudListEntity
 
 class ListActivity : AppCompatActivity () {
@@ -28,9 +27,9 @@ class ListActivity : AppCompatActivity () {
 
         linearLayoutManager = LinearLayoutManager(this)
         cloudListRecycler.layoutManager = linearLayoutManager
+
         adapter = CloudListAdapter()
         cloudListRecycler.adapter = adapter
-
     }
 
     override fun onBackPressed() {
@@ -46,22 +45,42 @@ class CloudListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> () {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val cell = LayoutInflater.from(parent.context).inflate(R.layout.listitem_cloudlist, null)
-        return cellView(cell)
+        //val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.listitem_cloudlist, null, false)
+        val inflatedView = parent.inflate(R.layout.listitem_cloudlist, false)
+        return CellView(inflatedView)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val cloud: CloudListEntity = CloudListDAO.listData[position]
-        val cell = holder as cellView
-
-        //cell.cloudImage = image
-        cell.cloudName.text = cloud.name
-        cell.cloudDetail.text = cloud.initials
+        val cell = holder as CellView
+        cell.bindData(cloud)
     }
 }
 
-class cellView(view: View): RecyclerView.ViewHolder(view) {
-    var cloudImage = view.findViewById<ImageView>(R.id.cloudImage)
-    var cloudName = view.findViewById<TextView>(R.id.cloudName)
-    var cloudDetail = view.findViewById<TextView>(R.id.cloudDetail)
+//extension
+fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
+    return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
+}
+
+class CellView(view: View): RecyclerView.ViewHolder(view), View.OnClickListener {
+    private var cellView: View = view
+
+    init {
+        view.setOnClickListener(this)
+    }
+
+    fun bindData(cloud: CloudListEntity) {
+        //cell.cloudImage = image
+        cellView.cloudName.text = cloud.name
+
+        val details = cloud.detail as CloudDetailEntity
+        cellView.cloudDetail.text = details.detail ?: ""
+    }
+
+    override fun onClick(v: View) {
+//        val context = itemView.context
+//        val showPhotoIntent = Intent(context, PhotoActivity::class.java)
+//        showPhotoIntent.putExtra(PHOTO_KEY, photo)
+//        context.startActivity(showPhotoIntent)
+    }
 }
