@@ -84,9 +84,9 @@ class CellView(view: View): RecyclerView.ViewHolder(view), View.OnClickListener 
     }
 
     override fun onClick(v: View) {
-//        val context = itemView.context
-//        val showPhotoIntent = Intent(context, PhotoActivity::class.java)
+        val context = itemView.context
+        val detailIntent = Intent(context, DetailActivity::class.java)
 //        showPhotoIntent.putExtra(PHOTO_KEY, photo)
-//        context.startActivity(showPhotoIntent)
+        context.startActivity(detailIntent)
     }
 }
