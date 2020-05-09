@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.listitem_cloudlist.view.*
 import net.cloudfields.nimbus.R
@@ -45,7 +46,6 @@ class CloudListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> () {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        //val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.listitem_cloudlist, null, false)
         val inflatedView = parent.inflate(R.layout.listitem_cloudlist, false)
         return CellView(inflatedView)
     }
@@ -70,11 +70,17 @@ class CellView(view: View): RecyclerView.ViewHolder(view), View.OnClickListener 
     }
 
     fun bindData(cloud: CloudListEntity) {
-        //cell.cloudImage = image
         cellView.cloudName.text = cloud.name
 
         val details = cloud.detail as CloudDetailEntity
         cellView.cloudDetail.text = details.detail ?: ""
+
+        Picasso.get()
+                .load(details.image)
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_background)
+                .fit().centerCrop()
+                .into(cellView.cloudImage)
     }
 
     override fun onClick(v: View) {

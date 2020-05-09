@@ -3,7 +3,6 @@ package net.cloudfields.nimbus.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.HapticFeedbackConstants
 import kotlinx.android.synthetic.main.activity_main.*
 import net.cloudfields.nimbus.R
@@ -24,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun proceedAction() {
-        startActivity(Intent(this@MainActivity, ListActivity::class.java))
+        val listIntent = Intent(this@MainActivity, ListActivity::class.java)
+        startActivity(listIntent)
         finish()
     }
 }
