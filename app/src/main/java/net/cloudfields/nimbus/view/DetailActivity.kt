@@ -7,10 +7,11 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import net.cloudfields.nimbus.R
 import net.cloudfields.nimbus.model.dao.CloudListDAO
+import net.cloudfields.nimbus.model.entity.CloudListEntity
 
 class DetailActivity : AppCompatActivity() {
 
-    var cloudObject = CloudListDAO.listData.first() //getIntent().getStringExtra("selectedCloudObject");
+    var cloudObject = CloudListDAO.selectedObject ?: CloudListEntity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -86,11 +86,9 @@ class CellView(view: View): RecyclerView.ViewHolder(view), View.OnClickListener 
     }
 
     override fun onClick(v: View) {
-        val cloudArray: Array<CloudListEntity> = Array(1){ selectedCloudObject!! }
-
+        CloudListDAO.selectedObject = this.selectedCloudObject
         val context = itemView.context
         val detailIntent = Intent(context, DetailActivity::class.java)
-        detailIntent.putExtra("selectedCloudObject", cloudArray)
         context.startActivity(detailIntent)
     }
 }
