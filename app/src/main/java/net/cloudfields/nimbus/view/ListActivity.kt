@@ -62,21 +62,20 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
 
 class CellView(view: View): RecyclerView.ViewHolder(view), View.OnClickListener {
     private var cellView: View = view
-    private var selectedCloudObject: CloudDetailEntity? = null
+    private var selectedCloudObject: CloudListEntity? = null
 
     init {
         view.setOnClickListener(this)
     }
 
     fun bindData(cloud: CloudListEntity) {
+        this.selectedCloudObject = cloud
+
         cellView.cloudName.text = cloud.name
 
         val cloudObject: CloudDetailEntity? = cloud.detail
-
         if (cloudObject != null) {
-            this.selectedCloudObject = cloudObject
             cellView.cloudDetail.text = cloudObject.detail ?: ""
-
             Picasso.get()
                 .load(cloudObject.image)
                 .placeholder(R.drawable.ic_launcher_foreground)
@@ -87,11 +86,11 @@ class CellView(view: View): RecyclerView.ViewHolder(view), View.OnClickListener 
     }
 
     override fun onClick(v: View) {
-        val cloudArray: Array<CloudDetailEntity> = Array(1){ selectedCloudObject!! }
+        val cloudArray: Array<CloudListEntity> = Array(1){ selectedCloudObject!! }
 
         val context = itemView.context
         val detailIntent = Intent(context, DetailActivity::class.java)
-        //detailIntent.putExtra("selectedCloudObject", cloudArray)
+        detailIntent.putExtra("selectedCloudObject", cloudArray)
         context.startActivity(detailIntent)
     }
 }
