@@ -19,7 +19,8 @@ class ParseController {
             .build()
 
         Parse.initialize(config)
-        this.anonymousLogin()
+        //this.anonymousLogin()
+        DataFetch.getData()
     }
 
     fun anonymousLogin() {

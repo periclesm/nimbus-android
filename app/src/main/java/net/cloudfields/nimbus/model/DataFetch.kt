@@ -1,5 +1,6 @@
 package net.cloudfields.nimbus.model
 
+import android.os.Handler
 import android.util.Log
 import com.parse.ParseObject
 import com.parse.ParseQuery
@@ -19,14 +20,19 @@ class DataFetch {
         fun getData() {
             this.getDataForClass(ClassName.cloudType)
             this.getDataForClass(ClassName.cloudDetail)
-            this.getDataForClass(ClassName.cloudList)
+
+            Handler().postDelayed ({
+                this.getDataForClass(ClassName.cloudList)
+            }, 1500)
         }
 
         private fun getDataForClass(className: ClassName) {
+            Log.d("[Nimbus] Data", "${className.name} data start")
             val query = ParseQuery.getQuery<ParseObject>(className.name)
             query.findInBackground { data, error ->
                 if (error != null) {
                     if (error.code == 209) {
+                        Log.d("[Nimbus] Session Expired", "While fetching ${className.name} data")
                         ParseUser.logOut()
                         ParseController.sharedInstance.anonymousLogin()
                     }
@@ -36,21 +42,24 @@ class DataFetch {
                     when (className) {
                         ClassName.cloudList -> {
                             CloudListDAO.listData = mappedData as List<CloudListEntity>
-                            Log.d("Data Fetch", "List Data Completed")
                         }
 
                         ClassName.cloudType -> {
                             CloudTypeDAO.typeData = mappedData as List<CloudTypeEntity>
-                            Log.d("Data Fetch", "Type Data Completed")
                         }
 
                         ClassName.cloudDetail -> {
                             CloudDetailDAO.detailData = mappedData as List<CloudDetailEntity>
-                            Log.d("Data Fetch", "Detail Data Completed")
                         }
                     }
+
+                    Log.d("[Nimbus] Data", "${className.name} data complete")
                 }
             }
         }
     }
+}
+
+private fun Handler.postDelayed(function: () -> Unit) {
+
 }

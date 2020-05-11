@@ -41,9 +41,7 @@ class ListActivity : AppCompatActivity () {
 
 class CloudListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> () {
 
-    override fun getItemCount(): Int {
-        return CloudListDAO.listData.count()
-    }
+    override fun getItemCount() = CloudListDAO.listData.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflatedView = parent.inflate(R.layout.listitem_cloudlist, false)
@@ -64,6 +62,7 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
 
 class CellView(view: View): RecyclerView.ViewHolder(view), View.OnClickListener {
     private var cellView: View = view
+    private var selectedCloudObject: CloudDetailEntity? = null
 
     init {
         view.setOnClickListener(this)
@@ -72,21 +71,27 @@ class CellView(view: View): RecyclerView.ViewHolder(view), View.OnClickListener 
     fun bindData(cloud: CloudListEntity) {
         cellView.cloudName.text = cloud.name
 
-        val details = cloud.detail as CloudDetailEntity
-        cellView.cloudDetail.text = details.detail ?: ""
+        val cloudObject: CloudDetailEntity? = cloud.detail
 
-        Picasso.get()
-                .load(details.image)
+        if (cloudObject != null) {
+            this.selectedCloudObject = cloudObject
+            cellView.cloudDetail.text = cloudObject.detail ?: ""
+
+            Picasso.get()
+                .load(cloudObject.image)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_background)
                 .fit().centerCrop()
                 .into(cellView.cloudImage)
+        }
     }
 
     override fun onClick(v: View) {
+        val cloudArray: Array<CloudDetailEntity> = Array(1){ selectedCloudObject!! }
+
         val context = itemView.context
         val detailIntent = Intent(context, DetailActivity::class.java)
-//        showPhotoIntent.putExtra(PHOTO_KEY, photo)
+        //detailIntent.putExtra("selectedCloudObject", cloudArray)
         context.startActivity(detailIntent)
     }
 }
