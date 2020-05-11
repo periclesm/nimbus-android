@@ -1,5 +1,6 @@
 package net.cloudfields.nimbus.model
 
+import android.util.Log
 import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.parse.ParseUser
@@ -35,14 +36,17 @@ class DataFetch {
                     when (className) {
                         ClassName.cloudList -> {
                             CloudListDAO.listData = mappedData as List<CloudListEntity>
+                            Log.d("Data Fetch", "List Data Completed")
                         }
 
                         ClassName.cloudType -> {
                             CloudTypeDAO.typeData = mappedData as List<CloudTypeEntity>
+                            Log.d("Data Fetch", "Type Data Completed")
                         }
 
                         ClassName.cloudDetail -> {
                             CloudDetailDAO.detailData = mappedData as List<CloudDetailEntity>
+                            Log.d("Data Fetch", "Detail Data Completed")
                         }
                     }
                 }
