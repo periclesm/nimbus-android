@@ -11,7 +11,7 @@
         <item name="colorAccent">@color/lightAccent</item>
     </style>
 
-    <style name="DarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="DarkTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/darkNav</item>
         <item name="colorPrimaryDark">@color/darkStatus</item>
         <item name="colorAccent">@color/darkAccent</item>
