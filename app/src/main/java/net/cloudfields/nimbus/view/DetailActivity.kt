@@ -1,7 +1,11 @@
 package net.cloudfields.nimbus.view
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -22,6 +26,26 @@ class DetailActivity : AppCompatActivity() {
     override fun onBackPressed() {
         startActivity(Intent(this@DetailActivity, ListActivity::class.java))
         finish()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_detail, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id: Int = item.getItemId()
+        if (id == R.id.wikiButton) {
+            Log.d("[Nimbus]", "Open Wikipedia link")
+
+            val link = cloudObject.detail?.wiki
+            if (!link.isNullOrEmpty()) {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                startActivity(intent)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     fun setupUI() {
