@@ -21,13 +21,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.ListActivity"
-            android:theme="@style/DarkTheme" >
-        </activity>
-
-        <activity android:name=".view.DetailActivity"
-            android:theme="@style/DarkTheme" >
-        </activity>
+        <activity android:name=".view.ListActivity"/>
+        <activity android:name=".view.DetailActivity"/>
 
     </application>
 

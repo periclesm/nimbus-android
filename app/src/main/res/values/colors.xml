@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>      //Navigation Bar
-    <color name="colorPrimaryDark">#3700B3</color>  //Status Bars
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">@color/lightNav</color>      //Navigation Bar
+    <color name="colorPrimaryDark">@color/lightStatus</color>  //Status Bars
+    <color name="colorAccent">@color/lightAccent</color>
 
     <!-- Light custom colors -->
-    <color name="lightNav">#01579B</color>
-    <color name="lightStatus">#01579B</color>
+    <color name="lightNav">#ffffff</color>
+    <color name="lightStatus">#ffffff</color>
     <color name="lightAccent">#7C4DFF</color>
     <color name="lightBackground">#fefefe</color>
+    <color name="lightText">#333333</color>
 
     <!-- Dark custom colors -->
-    <color name="darkNav">#1A237E</color>
-    <color name="darkStatus">#1A237E</color>
+    <color name="darkNav">#222222</color>
+    <color name="darkStatus">#222222</color>
     <color name="darkAccent">#fefefe</color>
-    <color name="darkBackground">#222222</color>
+    <color name="darkBackground">#111111</color>
+    <color name="darkText">#fefefe</color>
 
 </resources>
