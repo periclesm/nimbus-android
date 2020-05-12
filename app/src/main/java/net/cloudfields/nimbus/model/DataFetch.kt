@@ -59,7 +59,3 @@ class DataFetch {
         }
     }
 }
-
-private fun Handler.postDelayed(function: () -> Unit) {
-
-}

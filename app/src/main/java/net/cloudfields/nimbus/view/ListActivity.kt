@@ -78,7 +78,7 @@ class CellView(view: View): RecyclerView.ViewHolder(view), View.OnClickListener 
             cellView.cloudDetail.text = cloudObject.detail ?: ""
             Picasso.get()
                 .load(cloudObject.image)
-                .placeholder(R.drawable.ic_launcher_foreground)
+                //.placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_background)
                 .fit().centerCrop()
                 .into(cellView.cloudImage)

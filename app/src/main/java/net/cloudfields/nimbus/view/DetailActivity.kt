@@ -51,7 +51,7 @@ class DetailActivity : AppCompatActivity() {
     fun setupUI() {
         Picasso.get()
             .load(cloudObject.detail?.image)
-            .placeholder(R.drawable.ic_launcher_foreground)
+            //.placeholder(R.drawable.ic_launcher_background)
             .error(R.drawable.ic_launcher_background)
             .fit().centerCrop()
             .into(cloudImage)
