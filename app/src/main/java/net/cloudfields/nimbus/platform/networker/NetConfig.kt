@@ -22,13 +22,15 @@ class NetConfig {
     }
 
     var identifier: String = NetUtilities.Identifier()
+    var function: NetworkerFunction = NetworkerFunction.json
 
     var HTTPMethod: NetworkerHTTPMethod = NetworkerHTTPMethod.GET
     var caching: NetworkerCachingMethod = NetworkerCachingMethod.Default
-    var timeout: Long = 30000
+    var connectTimeout: Long = 30000
+    var readTimeout: Long = 30000
 
     var url: String = ""
-    var headers: Map<String,String>? = mapOf()
+    var headers: Map<String,String> = mapOf()
     var body: RequestBody? = null
     var sender: Any? = null
 
@@ -37,7 +39,9 @@ class NetConfig {
         fun createWithConfig(requestURL: String = "",
                              requestHeaders: Map<String, String>? = null,
                              requestBody: RequestBody? = null,
-                             requestTimeout: Long? = 30000, //timeout should be long
+                             requestConnectTimeout: Long? = 30000, //timeout should be long
+                             requestReadTimeout: Long? = 40000, //timeout should be long
+                             requestFunction: NetworkerFunction? = NetworkerFunction.json,
                              requestMethod: NetworkerHTTPMethod? = NetworkerHTTPMethod.GET,
                              requestCaching: NetworkerCachingMethod? = NetworkerCachingMethod.Default,
                              sender: Any? = null): NetConfig {
@@ -56,7 +60,9 @@ class NetConfig {
                 config.body = requestBody
             }
 
-            config.timeout = requestTimeout!!
+            config.connectTimeout = requestConnectTimeout!!
+            config.readTimeout = requestReadTimeout!!
+            config.function = requestFunction!!
             config.HTTPMethod = requestMethod!!
             config.caching = requestCaching!!
 
