@@ -16,13 +16,12 @@
 
         <ImageView
             android:id="@+id/cloudImage"
-            android:layout_width="0dp"
+            android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_launcher_background" />
