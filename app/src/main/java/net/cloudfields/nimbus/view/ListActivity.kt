@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.listitem_cloudlist.view.*
 import net.cloudfields.nimbus.R
 import net.cloudfields.nimbus.model.dao.CloudListDAO
-import net.cloudfields.nimbus.model.entity.CloudDetailEntity
-import net.cloudfields.nimbus.model.entity.CloudListEntity
+import net.cloudfields.nimbus.model.objects.CloudDetail
+import net.cloudfields.nimbus.model.objects.Cloud
 
 class ListActivity : AppCompatActivity () {
 
@@ -49,7 +49,7 @@ class CloudListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> () {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val cloud: CloudListEntity = CloudListDAO.listData[position]
+        val cloud: Cloud = CloudListDAO.listData[position]
         val cell = holder as CellView
         cell.bindData(cloud)
     }
@@ -62,18 +62,18 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
 
 class CellView(view: View): RecyclerView.ViewHolder(view), View.OnClickListener {
     private var cellView: View = view
-    private var selectedCloudObject: CloudListEntity? = null
+    private var selectedCloudObject: Cloud? = null
 
     init {
         view.setOnClickListener(this)
     }
 
-    fun bindData(cloud: CloudListEntity) {
+    fun bindData(cloud: Cloud) {
         this.selectedCloudObject = cloud
 
         cellView.cloudName.text = cloud.name
 
-        val cloudObject: CloudDetailEntity? = cloud.detail
+        val cloudObject: CloudDetail? = cloud.detail
         if (cloudObject != null) {
             cellView.cloudDetail.text = cloudObject.detail ?: ""
             Picasso.get()

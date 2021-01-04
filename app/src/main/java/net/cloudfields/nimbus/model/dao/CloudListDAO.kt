@@ -1,10 +1,10 @@
 package net.cloudfields.nimbus.model.dao
 
-import net.cloudfields.nimbus.model.entity.CloudListEntity
+import net.cloudfields.nimbus.model.objects.Cloud
 
 class CloudListDAO {
     companion object {
-        var listData: List<CloudListEntity> = listOf()
-        var selectedObject: CloudListEntity? = null
+        var listData: List<Cloud> = listOf()
+        var selectedObject: Cloud? = null
     }
 }

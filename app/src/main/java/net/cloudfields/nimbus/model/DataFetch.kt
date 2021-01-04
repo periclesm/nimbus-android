@@ -10,19 +10,19 @@ import net.cloudfields.nimbus.controller.ParseController
 import net.cloudfields.nimbus.model.dao.CloudDetailDAO
 import net.cloudfields.nimbus.model.dao.CloudListDAO
 import net.cloudfields.nimbus.model.dao.CloudTypeDAO
-import net.cloudfields.nimbus.model.entity.CloudDetailEntity
-import net.cloudfields.nimbus.model.entity.CloudListEntity
-import net.cloudfields.nimbus.model.entity.CloudTypeEntity
+import net.cloudfields.nimbus.model.objects.CloudDetail
+import net.cloudfields.nimbus.model.objects.Cloud
+import net.cloudfields.nimbus.model.objects.CloudAltitude
 
 class DataFetch {
     companion object {
 
         fun getData() {
-            this.getDataForClass(ClassName.cloudType)
+            this.getDataForClass(ClassName.cloudAltitude)
             this.getDataForClass(ClassName.cloudDetail)
 
             Handler().postDelayed ({
-                this.getDataForClass(ClassName.cloudList)
+                this.getDataForClass(ClassName.cloud)
             }, 1500)
         }
 
@@ -40,16 +40,16 @@ class DataFetch {
                     val mappedData = DataMap.dataMappingForClass(className, data)
 
                     when (className) {
-                        ClassName.cloudList -> {
-                            CloudListDAO.listData = mappedData as List<CloudListEntity>
+                        ClassName.cloud -> {
+                            CloudListDAO.listData = mappedData as List<Cloud>
                         }
 
-                        ClassName.cloudType -> {
-                            CloudTypeDAO.typeData = mappedData as List<CloudTypeEntity>
+                        ClassName.cloudAltitude -> {
+                            CloudTypeDAO.typeData = mappedData as List<CloudAltitude>
                         }
 
                         ClassName.cloudDetail -> {
-                            CloudDetailDAO.detailData = mappedData as List<CloudDetailEntity>
+                            CloudDetailDAO.detailData = mappedData as List<CloudDetail>
                         }
                     }
 

@@ -1,12 +1,12 @@
 package net.cloudfields.nimbus.model.dao
 
-import net.cloudfields.nimbus.model.entity.CloudDetailEntity
+import net.cloudfields.nimbus.model.objects.CloudDetail
 
 class CloudDetailDAO {
     companion object {
-        var detailData: List<CloudDetailEntity> = listOf()
+        var detailData: List<CloudDetail> = listOf()
 
-        fun search (objectId: String): CloudDetailEntity? {
+        fun search (objectId: String): CloudDetail? {
             val result = detailData.filter { it.objectId == objectId }
 
             if (!result.isNullOrEmpty()) {

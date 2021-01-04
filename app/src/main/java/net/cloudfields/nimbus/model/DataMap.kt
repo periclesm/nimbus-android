@@ -4,9 +4,9 @@ import com.parse.ParseObject
 import net.cloudfields.nimbus.ClassName
 import net.cloudfields.nimbus.model.dao.CloudDetailDAO
 import net.cloudfields.nimbus.model.dao.CloudTypeDAO
-import net.cloudfields.nimbus.model.entity.CloudDetailEntity
-import net.cloudfields.nimbus.model.entity.CloudListEntity
-import net.cloudfields.nimbus.model.entity.CloudTypeEntity
+import net.cloudfields.nimbus.model.objects.CloudDetail
+import net.cloudfields.nimbus.model.objects.Cloud
+import net.cloudfields.nimbus.model.objects.CloudAltitude
 
 class DataMap {
     companion object {
@@ -15,24 +15,24 @@ class DataMap {
             val dataMap: MutableList<Any> = mutableListOf()
 
             when (className) {
-                ClassName.cloudList -> {
+                ClassName.cloud -> {
                     for (dataObject: ParseObject in data) {
-                        val listObject = CloudListEntity()
+                        val listObject = Cloud()
 
                         listObject.objectId = dataObject.objectId
                         listObject.order = dataObject["order"] as? Int
                         listObject.name = dataObject["name"] as? String
                         listObject.initials = dataObject["initials"] as? String
-                        listObject.detail = this.objectMapForClass(ClassName.cloudDetail, dataObject["detail"] as? ParseObject) as? CloudDetailEntity
-                        listObject.type = this.objectMapForClass(ClassName.cloudType, dataObject["type"] as? ParseObject) as? CloudTypeEntity
+                        listObject.detail = this.objectMapForClass(ClassName.cloudDetail, dataObject["detail"] as? ParseObject) as? CloudDetail
+                        listObject.type = this.objectMapForClass(ClassName.cloudAltitude, dataObject["type"] as? ParseObject) as? CloudAltitude
 
                         dataMap.add(listObject)
                     }
                 }
 
-                ClassName.cloudType -> {
+                ClassName.cloudAltitude -> {
                     for (dataObject: ParseObject in data) {
-                        val typeObject = CloudTypeEntity()
+                        val typeObject = CloudAltitude()
 
                         typeObject.objectId = dataObject.objectId
                         typeObject.detail = dataObject["detail"] as? String
@@ -44,7 +44,7 @@ class DataMap {
 
                 ClassName.cloudDetail -> {
                     for (dataObject: ParseObject in data) {
-                        val detailObject = CloudDetailEntity()
+                        val detailObject = CloudDetail()
 
                         detailObject.objectId = dataObject.objectId
                         detailObject.detail = dataObject["detail"] as? String
@@ -65,7 +65,7 @@ class DataMap {
             }
 
             when (className) {
-                ClassName.cloudType -> {
+                ClassName.cloudAltitude -> {
                     val mappedObject = CloudTypeDAO.search(classObject.objectId)
                     return mappedObject
                 }

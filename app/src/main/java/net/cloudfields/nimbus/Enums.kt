@@ -1,7 +1,7 @@
 package net.cloudfields.nimbus
 
 enum class ClassName(name: String) {
-    cloudList("cloudList"),
-    cloudDetail("cloudDetail"),
-    cloudType("CloudType")
+    cloud("Cloud"),
+    cloudDetail("CloudDetail"),
+    cloudAltitude("CloudAltitude")
 }
