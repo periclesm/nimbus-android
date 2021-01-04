@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.res.Resources
 import net.cloudfields.nimbus.controller.ParseController
+import net.cloudfields.nimbus.model.DataManager
 
 class NimbusApplication : Application() {
     companion object {
@@ -27,6 +28,7 @@ class NimbusApplication : Application() {
         application = this
 
         ParseController.sharedInstance.initParse()
+        DataManager.prefetchData {}
     }
 
     override fun onTerminate() {

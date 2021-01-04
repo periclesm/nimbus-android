@@ -12,7 +12,7 @@ class Cloud {
 
     companion object {
 
-        fun mapObject(dataObject: Map<Any, Any>): Cloud {
+        fun mapObject(dataObject: Map<String, Any>): Cloud {
             val clObject = Cloud()
 
             clObject.objectId = dataObject["objectId"] as? String ?: ""
