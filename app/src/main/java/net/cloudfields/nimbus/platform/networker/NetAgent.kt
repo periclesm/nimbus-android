@@ -48,7 +48,6 @@ class NetAgent {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                //TODO("Not yet implemented")
                 val netResponse = NetResponse.constructResponse(identifier = config.identifier,
                     function = config.function,
                     completed = response.isSuccessful,

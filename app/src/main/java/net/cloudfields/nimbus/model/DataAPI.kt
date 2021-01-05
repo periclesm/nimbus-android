@@ -28,7 +28,7 @@ class DataAPI {
 
         fun getDefaultHeaders(): Map<String, String> {
             val headers = mutableMapOf<String, String>()
-            headers["Accert"] = "application/json"
+            headers["Accept"] = "application/json"
             headers["X-Parse-Application-Id"] = "Y6372R67Q2UCqCsWuCnD4YZ3ACEiiFxngF6WNqwE"
             headers["X-Parse-REST-API-Key"] = "LdJJnrhcCEiY8kRA3vAwg4sxT73LhQu84Efmv796"
 

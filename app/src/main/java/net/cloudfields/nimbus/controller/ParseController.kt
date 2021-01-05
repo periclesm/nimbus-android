@@ -3,7 +3,6 @@ package net.cloudfields.nimbus.controller
 import com.parse.Parse
 import com.parse.ParseAnonymousUtils
 import net.cloudfields.nimbus.NimbusApplication
-import net.cloudfields.nimbus.model.DataFetch
 
 class ParseController {
     companion object {
@@ -20,7 +19,7 @@ class ParseController {
 
         Parse.initialize(config)
         //this.anonymousLogin()
-        DataFetch.getData()
+        //DataFetch.getData()
     }
 
     fun anonymousLogin() {
@@ -28,7 +27,7 @@ class ParseController {
             if (error != null) {
 
             } else {
-                DataFetch.getData()
+                //DataFetch.getData()
             }
         }
     }

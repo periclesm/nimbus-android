@@ -1,5 +1,7 @@
 package net.cloudfields.nimbus.model.objects
 
+import org.json.JSONObject
+
 class Cloud {
 
     var objectId: String = ""
@@ -12,7 +14,7 @@ class Cloud {
 
     companion object {
 
-        fun mapObject(dataObject: Map<String, Any>): Cloud {
+        fun mapObject(dataObject: JSONObject): Cloud {
             val clObject = Cloud()
 
             clObject.objectId = dataObject["objectId"] as? String ?: ""
@@ -21,17 +23,17 @@ class Cloud {
             clObject.name = dataObject["name"] as? String ?: ""
             clObject.excerpt = dataObject["excerpt"] as? String ?: ""
 
-            val detailData = dataObject["detail"] as? Map<*, *>
+            val detailData = dataObject["detail"] as? JSONObject
             if (detailData != null) {
                 val detailObject = CloudDetail.mapObject(detailData)
-                //add to database
+                //TODO: add to database
                 clObject.detail = detailObject
             }
 
-            val typeData = dataObject["type"] as? Map<*, *>
+            val typeData = dataObject["type"] as? JSONObject
             if (typeData != null) {
                 val typeObject = CloudAltitude.mapObject(typeData)
-                //add to database
+                //TODO: add to database
                 clObject.type = typeObject
             }
 
