@@ -9,7 +9,7 @@ class NetAgent {
         val shared = NetAgent()
     }
 
-    // MARK: - Synthesis
+    // MARK: - Constructors
     private fun createClient(config: NetConfig): OkHttpClient {
         val client = OkHttpClient.Builder()
             .connectTimeout(config.connectTimeout, TimeUnit.MILLISECONDS)
@@ -30,15 +30,16 @@ class NetAgent {
         return request.build()
     }
 
-    // MARK: - Main Methods
+    // MARK: - Main Function
 
-    fun getData(config: NetConfig, function: NetConfig.NetworkerFunction, callback: (NetResponse) -> Unit) {
+    fun getData(config: NetConfig, callback: (NetResponse) -> Unit) {
         val client = this.createClient(config)
         val request = this.createRequest(config.url, config)
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 val netResponse = NetResponse.constructResponse(identifier = config.identifier,
+                    function = config.function,
                     completed = false,
                     error = e.localizedMessage,
                     data = null)
@@ -49,9 +50,10 @@ class NetAgent {
             override fun onResponse(call: Call, response: Response) {
                 //TODO("Not yet implemented")
                 val netResponse = NetResponse.constructResponse(identifier = config.identifier,
+                    function = config.function,
                     completed = response.isSuccessful,
                     error = null,
-                    data = response.body()
+                    data = response.body()?.byteStream()
                 )
 
                 callback(netResponse)
