@@ -1,9 +1,6 @@
 package net.cloudfields.nimbus.model.realmmanager
 
-import io.realm.RealmList
-import io.realm.RealmObject
-import io.realm.RealmResults
-import io.realm.Sort
+import io.realm.*
 
 class RealmQuery {
     companion object {

@@ -1,7 +1,7 @@
 package net.cloudfields.nimbus.model.realmmanager
 
-import io.realm.Realm
-import io.realm.RealmConfiguration
+import io.realm.*
+import net.cloudfields.nimbus.NimbusApplication
 
 class RealmDatabase {
     companion object {
@@ -26,6 +26,8 @@ class RealmDatabase {
 
     ///Initializes the database instance to be used in the app
     fun initDB(): Realm {
+        Realm.init(NimbusApplication.getContext()!!)
+
         val config = RealmConfiguration.Builder()
             .name(dbFileName)
             .schemaVersion(schemaVer)

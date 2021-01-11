@@ -11,10 +11,10 @@ class RealmOperation {
         }
 
         /// Adds a single object in the database
-        fun add(rObject: RealmObject, async: Boolean = false) {
+        fun add(rObject: RealmObject, async: Boolean? = false) {
             val db = RealmDatabase.shared.db
 
-            if (async) {
+            if (async!!) {
                 db.executeTransactionAsync({
                     db.insertOrUpdate(rObject)
                 }, { error ->
@@ -28,10 +28,10 @@ class RealmOperation {
         }
 
         /// Adds an array of objects in the database
-        fun add(objectList: List<RealmObject>, async: Boolean = false) {
+        fun add(objectList: RealmList<RealmObject>, async: Boolean? = false) {
             val db = RealmDatabase.shared.db
 
-            if (async) {
+            if (async!!) {
                 db.executeTransactionAsync({
                     db.insertOrUpdate(objectList)
                 }, { error ->

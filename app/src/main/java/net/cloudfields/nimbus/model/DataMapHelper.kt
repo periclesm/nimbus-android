@@ -1,61 +1,62 @@
 package net.cloudfields.nimbus.model
 
+import io.realm.*
+import net.cloudfields.nimbus.model.realmmanager.RealmOperation
 import net.cloudfields.nimbus.model.realmobjects.*
 import org.json.JSONArray
 import org.json.JSONObject
-
 
 class DataMapHelper {
     companion object {
 
         fun mapAltitudeData(data: JSONObject) {
-            val dataArray: Array<CloudAltitude> = arrayOf()
+            val dataList: RealmList<RealmObject> = RealmList()
             val results = data["results"] as? JSONArray
 
             if (results != null) {
                 for (index in 0 until results.length()) {
                     val dataObject = results.getJSONObject(index)
                     val altitudeObject = CloudAltitude.mapObject(dataObject)
-                    dataArray.plus(altitudeObject)
+                    dataList.add(altitudeObject)
                 }
             }
 
-            if (dataArray.isNotEmpty()) {
-                //TODO: RealmOperation.add(dataArray: dataArray, updatePolicy: .modified)
+            if (dataList.isNotEmpty()) {
+                RealmOperation.add(dataList)
             }
         }
 
         fun mapDetailData(data: JSONObject) {
-            val dataArray: Array<CloudDetail> = arrayOf()
+            val dataList: RealmList<RealmObject> = RealmList()
             val results = data["results"] as? JSONArray
 
             if (results != null) {
                 for (index in 0 until results.length()) {
                     val dataObject = results.getJSONObject(index)
-                    //note: this wil lcrash because it contains a pointer that I have not yet mapped. in to do list...
+                    //todo: Commented because will crash. Contains a pointer that I have not yet mapped. in to do list...
                     //val detailObject = CloudDetail.mapObject(dataObject)
-                    //dataArray.plus(detailObject)
+                    //dataArray.add(detailObject)
                 }
 
-                if (dataArray.isNotEmpty()) {
-                    //TODO: RealmOperation.add(dataArray: dataArray, updatePolicy: .modified)
+                if (dataList.isNotEmpty()) {
+                    RealmOperation.add(dataList)
                 }
             }
         }
 
         fun mapCloudData(data: JSONObject) {
-            val dataArray: List<Cloud> = mutableListOf()
+            val dataList: RealmList<RealmObject> = RealmList()
             val results: JSONArray? = data.getJSONArray("results")
 
             if (results != null)
                 for (index in 0 until results.length()) {
                     val dataObject = results.getJSONObject(index)
                     val cloudObject = Cloud.mapObject(dataObject)
-                    dataArray.plus(cloudObject)
+                    dataList.add(cloudObject)
                 }
 
-            if (dataArray.isNotEmpty()) {
-                //TODO: RealmOperation.add(dataArray: dataArray, updatePolicy:.modified)
+            if (dataList.isNotEmpty()) {
+                RealmOperation.add(objectList = dataList)
             }
         }
     }

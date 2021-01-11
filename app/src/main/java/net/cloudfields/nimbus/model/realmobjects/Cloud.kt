@@ -2,6 +2,7 @@ package net.cloudfields.nimbus.model.realmobjects
 
 import io.realm.RealmObject
 import io.realm.annotations.*
+import net.cloudfields.nimbus.model.realmmanager.RealmOperation
 import org.json.JSONObject
 
 open class Cloud: RealmObject() {
@@ -27,14 +28,14 @@ open class Cloud: RealmObject() {
             val detailData = dataObject["detail"] as? JSONObject
             if (detailData != null) {
                 val detailObject = CloudDetail.mapObject(detailData)
-                //TODO: add to database
+                RealmOperation.add(detailObject)
                 clObject.detail = detailObject
             }
 
             val typeData = dataObject["type"] as? JSONObject
             if (typeData != null) {
                 val typeObject = CloudAltitude.mapObject(typeData)
-                //TODO: add to database
+                RealmOperation.add(typeObject)
                 clObject.type = typeObject
             }
 
