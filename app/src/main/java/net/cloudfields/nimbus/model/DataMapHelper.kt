@@ -1,6 +1,6 @@
 package net.cloudfields.nimbus.model
 
-import net.cloudfields.nimbus.model.objects.*
+import net.cloudfields.nimbus.model.realmobjects.*
 import org.json.JSONArray
 import org.json.JSONObject
 

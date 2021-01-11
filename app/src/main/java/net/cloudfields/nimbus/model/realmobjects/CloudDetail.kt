@@ -1,13 +1,15 @@
-package net.cloudfields.nimbus.model.objects
+package net.cloudfields.nimbus.model.realmobjects
 
+import io.realm.RealmObject
+import io.realm.annotations.*
 import org.json.JSONObject
 
-class CloudDetail {
+open class CloudDetail: RealmObject() {
 
-    var objectId: String = ""
+    @PrimaryKey var objectId: String = ""
     var detail: String? = ""
-    var image: String? = ""
-    var wiki: String? = ""
+    @Index var image: String? = ""
+    @Index var wiki: String? = ""
 
     companion object {
 

@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 30
@@ -10,7 +12,7 @@ android {
     defaultConfig {
         applicationId "net.cloudfields.nimbus"
         minSdkVersion 26
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -43,4 +45,8 @@ dependencies {
 
     implementation "com.github.parse-community.Parse-SDK-Android:parse:1.25.0"
     implementation 'com.squareup.picasso:picasso:2.71828'
+}
+
+realm {
+    syncEnabled = false
 }

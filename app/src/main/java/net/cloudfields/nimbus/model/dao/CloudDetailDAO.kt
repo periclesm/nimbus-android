@@ -1,6 +1,6 @@
 package net.cloudfields.nimbus.model.dao
 
-import net.cloudfields.nimbus.model.objects.CloudDetail
+import net.cloudfields.nimbus.model.realmobjects.CloudDetail
 
 class CloudDetailDAO {
     companion object {

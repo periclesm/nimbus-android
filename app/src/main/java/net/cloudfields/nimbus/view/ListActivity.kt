@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.listitem_cloudlist.view.*
 import net.cloudfields.nimbus.R
 import net.cloudfields.nimbus.model.dao.CloudListDAO
-import net.cloudfields.nimbus.model.objects.CloudDetail
-import net.cloudfields.nimbus.model.objects.Cloud
+import net.cloudfields.nimbus.model.realmobjects.CloudDetail
+import net.cloudfields.nimbus.model.realmobjects.Cloud
 
 class ListActivity : AppCompatActivity () {
 

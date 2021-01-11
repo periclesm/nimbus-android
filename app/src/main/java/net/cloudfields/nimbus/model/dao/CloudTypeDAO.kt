@@ -1,6 +1,6 @@
 package net.cloudfields.nimbus.model.dao
 
-import net.cloudfields.nimbus.model.objects.CloudAltitude
+import net.cloudfields.nimbus.model.realmobjects.CloudAltitude
 
 class CloudTypeDAO {
     companion object {

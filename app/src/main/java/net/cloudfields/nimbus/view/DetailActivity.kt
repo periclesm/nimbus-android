@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import net.cloudfields.nimbus.R
 import net.cloudfields.nimbus.model.dao.CloudListDAO
-import net.cloudfields.nimbus.model.objects.Cloud
+import net.cloudfields.nimbus.model.realmobjects.Cloud
 
 class DetailActivity : AppCompatActivity() {
 

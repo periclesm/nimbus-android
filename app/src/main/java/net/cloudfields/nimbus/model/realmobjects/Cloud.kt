@@ -1,19 +1,20 @@
-package net.cloudfields.nimbus.model.objects
+package net.cloudfields.nimbus.model.realmobjects
 
+import io.realm.RealmObject
+import io.realm.annotations.*
 import org.json.JSONObject
 
-class Cloud {
+open class Cloud: RealmObject() {
 
-    var objectId: String = ""
-    var order: Int? = 0
-    var initials: String? = ""
-    var name: String? = ""
+    @PrimaryKey var objectId: String = ""
+    @Index var order: Int? = 0
+    @Index var initials: String? = ""
+    @Index var name: String? = ""
     var excerpt: String? = ""
-    var detail: CloudDetail? = CloudDetail()
-    var type: CloudAltitude? = CloudAltitude()
+    var detail: CloudDetail? = null
+    var type: CloudAltitude? = null
 
     companion object {
-
         fun mapObject(dataObject: JSONObject): Cloud {
             val clObject = Cloud()
 
