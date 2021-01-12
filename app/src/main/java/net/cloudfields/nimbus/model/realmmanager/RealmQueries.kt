@@ -2,7 +2,7 @@ package net.cloudfields.nimbus.model.realmmanager
 
 import io.realm.*
 
-class RealmQuery {
+class RealmQueries {
     companion object {
 
         //MARK: - Composite Sort and Filter --
@@ -64,7 +64,7 @@ class RealmQuery {
          */
         fun sort(objectList: RealmList<RealmObject>, sortAttribute: String, ascending: Sort = Sort.ASCENDING): RealmList<RealmObject> {
             val results = objectList.sort(sortAttribute, ascending)
-            return this.resultsToListConversion(results)
+            return this.resultsToRealmListConversion(results)
         }
 
         //MARK: - Limit
@@ -88,16 +88,36 @@ class RealmQuery {
         /**
          * Converts an input Realm `Results` collection to a Realm `List`.
          */
-        fun resultsToListConversion(results: RealmResults<RealmObject>): RealmList<RealmObject> {
-            if (results.isNotEmpty()) {
-                val resultsList: RealmList<RealmObject> = RealmList()
+        fun resultsToRealmListConversion(results: RealmResults<RealmObject>?): RealmList<RealmObject> {
+            if (results != null) {
+                if (results.isNotEmpty()) {
+                    val resultsList: RealmList<RealmObject> = RealmList()
 
-                for (rObject in results) {
-                    resultsList.add(rObject)
+                    for (rObject in results) {
+                        resultsList.add(rObject)
+                    }
+
+                    return resultsList
                 }
             }
 
             return RealmList()
+        }
+
+        fun resultsToListConversion(results: RealmResults<RealmObject>?): List<RealmObject> {
+            if (results != null) {
+                if (results.isNotEmpty()) {
+                    val resultsList: MutableList<RealmObject> = mutableListOf()
+
+                    for (rObject in results) {
+                        resultsList.add(rObject)
+                    }
+
+                    return resultsList
+                }
+            }
+
+            return listOf()
         }
     }
 }

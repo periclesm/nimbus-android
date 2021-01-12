@@ -24,6 +24,10 @@ class RealmDatabase {
             return this.mainDB!!
         }
 
+    fun initDatabase() {
+        this.mainDB = this.initDB()
+    }
+
     ///Initializes the database instance to be used in the app
     fun initDB(): Realm {
         Realm.init(NimbusApplication.getContext()!!)
@@ -32,6 +36,8 @@ class RealmDatabase {
             .name(dbFileName)
             .schemaVersion(schemaVer)
             .deleteRealmIfMigrationNeeded()
+            .allowQueriesOnUiThread(true)
+            .allowWritesOnUiThread(true)
             .compactOnLaunch()
             .build()
 

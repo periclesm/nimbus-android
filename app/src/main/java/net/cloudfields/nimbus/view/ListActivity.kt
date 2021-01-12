@@ -13,12 +13,10 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.listitem_cloudlist.view.*
 import net.cloudfields.nimbus.R
-import net.cloudfields.nimbus.model.dao.CloudListDAO
 import net.cloudfields.nimbus.model.realmobjects.CloudDetail
 import net.cloudfields.nimbus.model.realmobjects.Cloud
 
 class ListActivity : AppCompatActivity () {
-
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: CloudListAdapter
 
@@ -26,10 +24,13 @@ class ListActivity : AppCompatActivity () {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+        CloudVM.shared.getData()
+
         linearLayoutManager = LinearLayoutManager(this)
         cloudListRecycler.layoutManager = linearLayoutManager
 
         adapter = CloudListAdapter()
+
         cloudListRecycler.adapter = adapter
     }
 
@@ -40,17 +41,16 @@ class ListActivity : AppCompatActivity () {
 }
 
 class CloudListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> () {
-
-    override fun getItemCount() = CloudListDAO.listData.size
+    override fun getItemCount() = CloudVM.shared.cloudData.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflatedView = parent.inflate(R.layout.listitem_cloudlist, false)
-        return CellView(inflatedView)
+        return ListItemView(inflatedView)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val cloud: Cloud = CloudListDAO.listData[position]
-        val cell = holder as CellView
+        val cloud: Cloud = CloudVM.shared.cloudData[position]
+        val cell = holder as ListItemView
         cell.bindData(cloud)
     }
 }
@@ -60,7 +60,7 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
     return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 }
 
-class CellView(view: View): RecyclerView.ViewHolder(view), View.OnClickListener {
+class ListItemView(view: View): RecyclerView.ViewHolder(view), View.OnClickListener {
     private var cellView: View = view
     private var selectedCloudObject: Cloud? = null
 
@@ -86,7 +86,7 @@ class CellView(view: View): RecyclerView.ViewHolder(view), View.OnClickListener 
     }
 
     override fun onClick(v: View) {
-        CloudListDAO.selectedObject = this.selectedCloudObject
+        CloudVM.shared.selectedCloud = this.selectedCloudObject
         val context = itemView.context
         val detailIntent = Intent(context, DetailActivity::class.java)
         context.startActivity(detailIntent)
