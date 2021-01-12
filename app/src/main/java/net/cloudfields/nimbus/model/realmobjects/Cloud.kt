@@ -1,5 +1,7 @@
 package net.cloudfields.nimbus.model.realmobjects
 
+import android.os.Handler
+import android.os.Looper
 import io.realm.RealmObject
 import io.realm.annotations.*
 import net.cloudfields.nimbus.model.realmmanager.RealmOperation
@@ -28,15 +30,21 @@ open class Cloud: RealmObject() {
             val detailData = dataObject["detail"] as? JSONObject
             if (detailData != null) {
                 val detailObject = CloudDetail.mapObject(detailData)
-                RealmOperation.add(detailObject)
                 clObject.detail = detailObject
+
+                Handler(Looper.getMainLooper()).post(Runnable {
+                    RealmOperation.add(detailObject)
+                })
             }
 
             val typeData = dataObject["type"] as? JSONObject
             if (typeData != null) {
                 val typeObject = CloudAltitude.mapObject(typeData)
-                RealmOperation.add(typeObject)
                 clObject.type = typeObject
+
+                Handler(Looper.getMainLooper()).post(Runnable {
+                    RealmOperation.add(typeObject)
+                })
             }
 
             return clObject

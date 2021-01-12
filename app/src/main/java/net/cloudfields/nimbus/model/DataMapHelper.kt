@@ -1,10 +1,13 @@
 package net.cloudfields.nimbus.model
 
+import android.os.Handler
+import android.os.Looper
 import io.realm.*
 import net.cloudfields.nimbus.model.realmmanager.RealmOperation
 import net.cloudfields.nimbus.model.realmobjects.*
 import org.json.JSONArray
 import org.json.JSONObject
+
 
 class DataMapHelper {
     companion object {
@@ -22,7 +25,9 @@ class DataMapHelper {
             }
 
             if (dataList.isNotEmpty()) {
-                RealmOperation.add(dataList)
+                Handler(Looper.getMainLooper()).post(Runnable {
+                    RealmOperation.add(dataList)
+                })
             }
         }
 
@@ -39,7 +44,9 @@ class DataMapHelper {
                 }
 
                 if (dataList.isNotEmpty()) {
-                    RealmOperation.add(dataList)
+                    Handler(Looper.getMainLooper()).post(Runnable {
+                        RealmOperation.add(dataList)
+                    })
                 }
             }
         }
@@ -56,7 +63,9 @@ class DataMapHelper {
                 }
 
             if (dataList.isNotEmpty()) {
-                RealmOperation.add(objectList = dataList)
+                Handler(Looper.getMainLooper()).post(Runnable {
+                    RealmOperation.add(dataList)
+                })
             }
         }
     }
