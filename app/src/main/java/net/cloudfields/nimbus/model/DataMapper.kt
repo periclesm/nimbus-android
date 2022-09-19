@@ -2,14 +2,15 @@ package net.cloudfields.nimbus.model
 
 import android.os.Handler
 import android.os.Looper
-import io.realm.*
+import io.realm.RealmList
+import io.realm.RealmObject
 import net.cloudfields.nimbus.model.realmmanager.RealmOperation
-import net.cloudfields.nimbus.model.realmobjects.*
+import net.cloudfields.nimbus.model.realmobjects.Cloud
+import net.cloudfields.nimbus.model.realmobjects.CloudAltitude
 import org.json.JSONArray
 import org.json.JSONObject
 
-
-class DataMapHelper {
+class DataMapper {
     companion object {
 
         fun mapAltitudeData(data: JSONObject) {

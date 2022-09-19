@@ -30,7 +30,6 @@ class ListActivity : AppCompatActivity () {
         cloudListRecycler.layoutManager = linearLayoutManager
 
         adapter = CloudListAdapter()
-
         cloudListRecycler.adapter = adapter
     }
 

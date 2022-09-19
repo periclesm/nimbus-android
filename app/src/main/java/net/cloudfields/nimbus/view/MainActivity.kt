@@ -1,11 +1,14 @@
 package net.cloudfields.nimbus.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.HapticFeedbackConstants
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_main.*
 import net.cloudfields.nimbus.R
+import net.cloudfields.nimbus.model.DataManager
+import net.cloudfields.nimbus.model.realmmanager.RealmDatabase
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,6 +16,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         this.setActions()
+
+        RealmDatabase.shared.initDatabase()
+
+        DataManager.prefetchData { completed ->
+            if (completed) {
+                runOnUiThread {
+                    proceedButton.isEnabled = true
+                }
+            }
+        }
     }
 
     private fun setActions() {

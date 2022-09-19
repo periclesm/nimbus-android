@@ -10,13 +10,6 @@ class DataManager {
             this.getCombinedData { completed ->
                 callback(completed)
             }
-
-            //just testing, don't bother...
-//            this.getAltitudeData {
-//                this.getDetailData {
-//                    //this.getCloudData { }
-//                }
-//            }
         }
 
         fun getCombinedData(callback: (Boolean) -> Unit) {
@@ -26,7 +19,7 @@ class DataManager {
             Networker.getJSONData(config = config, callback = { netResponse ->
                 if (netResponse.completed) {
                     val data = netResponse.data as JSONObject
-                    DataMapHelper.mapCloudData(data)
+                    DataMapper.mapCloudData(data)
                     callback(true)
                 }
                 else {
@@ -42,7 +35,7 @@ class DataManager {
             Networker.getJSONData(config, callback = { netResponse ->
                 if (netResponse.completed) {
                     val data = netResponse.data as JSONObject
-                    DataMapHelper.mapAltitudeData(data)
+                    DataMapper.mapAltitudeData(data)
                     callback(true)
                 }
                 else {
@@ -58,7 +51,7 @@ class DataManager {
             Networker.getJSONData(config, callback = { netResponse ->
                 if (netResponse.completed) {
                     val data = netResponse.data as JSONObject
-                    DataMapHelper.mapDetailData(data)
+                    DataMapper.mapDetailData(data)
                     callback(true)
                 }
                 else {
@@ -74,7 +67,7 @@ class DataManager {
             Networker.getJSONData(config, callback = { netResponse ->
                 if (netResponse.completed) {
                     val data = netResponse.data as JSONObject
-                    DataMapHelper.mapCloudData(data)
+                    DataMapper.mapCloudData(data)
                     callback(true)
                 }
                 else {
