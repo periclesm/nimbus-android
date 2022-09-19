@@ -52,7 +52,7 @@ class NetAgent {
                     function = config.function,
                     completed = response.isSuccessful,
                     error = null,
-                    data = response.body?.byteStream()
+                    data = response.body()?.byteStream()
                 )
 
                 callback(netResponse)
